@@ -1,0 +1,24 @@
+## First I need to find the economics courses being taught
+SELECT CourseName
+FROM Courses 
+WHERE Subject='Economics';
+
+## Next, I look for the titles from the  Textboos table  that go with the  economics courses
+SELECT CourseName, Title
+FROM Courses
+JOIN Textbooks
+ON Courses.CourseID=Textbooks.CourseID
+WHERE Courses.Subject='Economics';
+
+## Last is to find all of the authors along  with the textbook title and the economics course title
+  ### AuthorTextbookLink was used because there was no direct link with  the  Courses and Textbooks table
+SELECT Courses.CourseName, Textbooks.Title, Author.Name
+FROM Courses
+JOIN Textbooks
+ON Courses.CourseID=Textbooks.CourseID
+LEFT JOIN AuthorTextbookLink
+ON AuthorTextbookLink.TextbookID=Textbooks.TextbookID
+LEFT JOIN Author
+ON Author.AuthorID=AuthorTextbookLink.AuthorID
+WHERE Courses.Subject='Economics'
+ORDER BY 3;
