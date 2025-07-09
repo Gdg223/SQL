@@ -46,6 +46,7 @@ ORDER BY 1;
 
 # Looked for the average rating from the Kitchen Supplies category
 
-SELECT ROUND(AVG(average_rating),2)
-FROM superstore
-WHERE category = 'Kitchen Supplies';
+--Query #3 Avg Rating by Category
+SELECT category, ROUND(AVG(average_rating),1) as avg_category_rating
+FROM superstore 
+GROUP BY 1;
