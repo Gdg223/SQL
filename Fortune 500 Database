@@ -81,3 +81,40 @@ SELECT company_name, CASE WHEN employees >=500000 THEN 'VERY LARGE'
 WHEN employees >= 100000 THEN 'LARGE' WHEN employees >= 75000 THEN 'MEDIUM' ELSE 'AVERAGE' END AS 'employee_size'
 FROM fortune_companies
 ORDER BY employee_size;
+
+SELECT *
+FROM fortune_companies
+LIMIT 5;
+
+-- Rate company tenure using case statement
+SELECT company_name,
+CASE 
+WHEN avg_employee_tenure >=7 THEN 'Excellent'
+WHEN avg_employee_tenure >=5 THEN 'Great'
+ELSE 'Good'
+END AS tenure_rating
+FROM fortune_companies
+ORDER BY avg_employee_tenure Desc;
+
+-- Show Technology companies with healthcare benefits
+SELECT company_name,
+CASE 
+WHEN healthcare_benefits =1 THEN "Offers healthcare Benefits"
+ELSE "Doesn't offer healthcare benefits"
+END AS healthcare_benefits_tracker
+FROM fortune_companies
+WHERE industry IN ("Technology")
+ORDER BY healthcare_benefits Desc;
+
+-- Average revenue by industry making more than 200 billion
+SELECT industry, ROUND(AVG(revenue),2) as avg_revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING ROUND(AVG(revenue),2)>200
+ORDER BY 2 Desc;
+
+-- Companies with over 100,000 employees
+SELECT company_name, employees
+FROM fortune_companies
+WHERE employees>100000
+ORDER BY employees Desc;
