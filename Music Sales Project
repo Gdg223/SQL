@@ -36,6 +36,16 @@ JOIN chinook.artists artist
 ON album.ArtistId = artist.ArtistId
 ORDER BY 2;
 
+-- Show all the Tracks, and include the Album name, Media type, and Genre.
+SELECT t.Name, album.Title, m.name as MediaType, g.name as Genre
+FROM chinook.tracks t
+JOIN chinook.albums album
+ON t.AlbumId = album.AlbumId
+JOIN chinook.media_types m
+ON t.MediaTypeId = m.MediaTypeId
+JOIN chinook.genres g
+ON t.GenreId = g.GenreId
+ORDER BY 4
 
 
 
