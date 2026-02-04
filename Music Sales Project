@@ -47,6 +47,23 @@ JOIN chinook.genres g
 ON t.GenreId = g.GenreId
 ORDER BY 4
 
+-- Show the total sales made by each sales agent.
+SELECT
+    e.EmployeeId,
+    e.LastName,
+    e.FirstName,
+    ROUND(SUM(i.Total), 2) AS TotalSales
+FROM chinook.invoices i
+JOIN chinook.customers c
+    ON i.CustomerID = c.CustomerID
+JOIN chinook.employees e
+    ON c.SupportRepID = e.EmployeeID
+WHERE e.Title LIKE 'Sales%Agent'
+GROUP BY
+    e.EmployeeId,
+    e.LastName,
+    e.FirstName
+ORDER BY TotalSales DESC;
 
 
 
