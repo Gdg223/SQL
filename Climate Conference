@@ -108,7 +108,7 @@ FROM vips
 LEFT JOIN events
 ON vips.event = events.event_id
 WHERE events.event_type = 'Panel'
-ORDER BY 1;
+ORDER BY vips.assoc_type;
 
 -- Who is reviewing each person's panel
 SELECT reviewers.member_id member_id, 
