@@ -23,10 +23,10 @@ SELECT t.Name,ii.InvoiceLineId
 FROM chinook.tracks t
 JOIN chinook.invoice_items ii
 ON t.TrackId = ii.TrackId
-ORDER BY 2;
+ORDER BY ii.InvoiceLineId;
 
 -- Show the purchased track name AND artist name with each invoice line ID.
-SELECT t.Name,ii.InvoiceLineId,artist.name
+SELECT t.Name,ii.InvoiceLineId,artist.Name
 FROM chinook.tracks t
 JOIN chinook.invoice_items ii
 ON t.TrackId = ii.TrackId
@@ -34,10 +34,10 @@ JOIN chinook.albums album
 ON t.AlbumId = album.AlbumId
 JOIN chinook.artists artist
 ON album.ArtistId = artist.ArtistId
-ORDER BY 2;
+ORDER BY ii.InvoiceLineID;
 
 -- Show all the Tracks, and include the Album name, Media type, and Genre.
-SELECT t.Name, album.Title, m.name as MediaType, g.name as Genre
+SELECT t.Name, album.Title, m.Name as MediaType, g.Name as Genre
 FROM chinook.tracks t
 JOIN chinook.albums album
 ON t.AlbumId = album.AlbumId
@@ -45,7 +45,7 @@ JOIN chinook.media_types m
 ON t.MediaTypeId = m.MediaTypeId
 JOIN chinook.genres g
 ON t.GenreId = g.GenreId
-ORDER BY 4
+ORDER BY Genre;
 
 -- Show the total sales made by each sales agent.
 SELECT
