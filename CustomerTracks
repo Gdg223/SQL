@@ -1,0 +1,20 @@
+--- Customers ranked by  most money spent
+SELECT 
+ FirstName,
+ LastName,
+ total_spent,
+ DENSE_RANK () OVER(ORDER BY total_spent DESC) as spending_rank
+FROM (
+   SELECT 
+    c.FirstName,
+    c.LastName,
+    SUM(i.total) as total_spent
+   FROM invoices i
+   JOIN customers c
+   ON i.CustomerId = c.CustomerId
+   GROUP BY 
+     i.CustomerId,
+     c.FirstName,
+     c.LastName
+      ) t
+ORDER BY total_spent DESC
