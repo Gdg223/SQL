@@ -18,3 +18,27 @@ FROM (
      c.LastName
       ) t
 ORDER BY total_spent DESC
+
+--- Customer who spent the second most
+SELECT *
+FROM (
+   SELECT 
+     FirstName,
+     LastName,
+     total_spent,
+     DENSE_RANK() OVER (ORDER BY total_spent DESC) as spending_rank
+   FROM (
+       SELECT
+        c.FirstName,
+        c.LastName,
+        SUM(i.total) as total_spent
+       FROM invoices i
+       JOIN customers c
+       ON i.CustomerId = c.CustomerId
+       GROUP BY 
+       c.CustomerId,
+       c.FirstName,
+       c.LastName
+    )t
+  )ranked
+WHERE spending_rank = 2
