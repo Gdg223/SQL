@@ -13,7 +13,7 @@ FROM (
    JOIN customers c
    ON i.CustomerId = c.CustomerId
    GROUP BY 
-     i.CustomerId,
+     c.CustomerId,
      c.FirstName,
      c.LastName
       ) t
