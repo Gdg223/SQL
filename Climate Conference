@@ -117,3 +117,16 @@ recipients.last_name recipient_last_name, recipients.first_name recipient_first_
 FROM vips reviewers
 JOIN vips recipients
 ON reviewers.member_id = recipients.provides_feedback_to;
+
+-- Hotels that employees in government are staying at
+SELECT vips.first_name,
+vips.last_name,
+vips.assoc_type,
+hotels.hotel_name
+FROM vips
+JOIN reservations
+ON vips.member_id = reservations.member_id
+LEFT JOIN hotels
+ON reservations.hotel = hotels.hotel_id
+WHERE vips.assoc_type = (SELECT vips.assoc_type FROM vips
+WHERE assoc_type = 'government')
